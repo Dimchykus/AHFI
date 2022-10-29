@@ -5,25 +5,13 @@ import VacancyList from "../src/components/VacancysList";
 import Vacancy from "../src/components/Vacancy";
 import Vidguky from "../src/components/Vidguky";
 import Main from "../src/components/Main";
+import Header from "./components/Header";
 
 function App() {
   return (
     <Router>
       <div>
-        <nav>
-          {/* <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/{id}">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul> */}
-        </nav>
-
+        <Header />
         <Routes>
           <Route path="/" element={<Main />}></Route>
           <Route path="/vacancies" element={<VacancyList />}>

@@ -1,0 +1,20 @@
+.header {
+  height: 24px;
+  width: 100%;
+  border-bottom: 1px solid black;
+  display: flex;
+  padding: 16px 24px;
+  justify-content: flex-start;
+  gap: 18px;
+  align-items: center;
+
+  a {
+    color: black;
+    text-decoration: none;
+    display: block;
+  }
+
+  .active {
+    text-decoration: underline;
+  }
+}
