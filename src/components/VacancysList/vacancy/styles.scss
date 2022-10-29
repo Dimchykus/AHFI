@@ -1,0 +1,54 @@
+.each-vacancy {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
+  height: 140px;
+  display: flex;
+  margin-bottom: 30px;
+
+  &__name {
+    padding-left: 10px;
+
+    margin: auto 0;
+  }
+
+  &__participate {
+    height: 40px;
+    margin: auto 0;
+    margin-left: auto;
+    margin-right: 15px;
+    align-items: center;
+    background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    cursor: pointer;
+    color: #ffffff;
+
+    :hover,
+    :active {
+      outline: 0;
+    }
+    @media (min-width: 768px) {
+      .button-63 {
+        font-size: 24px;
+        min-width: 196px;
+      }
+    }
+  }
+}
+
+/* CSS */
+
+.description-block {
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__salary {
+  }
+
+  &__description {
+    height: 50px;
+  }
+}
