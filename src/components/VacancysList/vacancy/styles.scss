@@ -11,7 +11,12 @@
     margin: auto 0;
   }
 
+  &__full {
+    all: unset;
+  }
+
   &__participate {
+    z-index: 5;
     height: 40px;
     margin: auto 0;
     margin-left: auto;
