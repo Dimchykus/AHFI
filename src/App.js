@@ -8,12 +8,21 @@ import Main from "../src/components/Main";
 import CreateVacancy from "../src/components/CreateVacancy";
 import Header from "./components/Header";
 import Api from "./api";
+import isAdmin from "./utils/index";
 
 function App() {
-  const user = Api.get("users").then((res) => {
-    console.log(res.data._embedded);
-    return res;
-  });
+  // const user = Api.get("users").then((res) => {
+  //   console.log(res.data._embedded);
+  //   return res;
+  // });
+
+  const user = {
+    id: 0,
+    name: "Торас",
+    age: -1,
+    experience: 100500,
+    isAdmin: true,
+  };
 
   if (!user) return null;
 
@@ -22,11 +31,20 @@ function App() {
       <div>
         <Header />
         <Routes>
-          <Route path="/" element={<Main />}></Route>
-          <Route path="/vacancies" element={<VacancyList />}></Route>
-          <Route path="/vacancies/:id" element={<Vacancy />}></Route>
-          <Route path="/vidguky" element={<Vidguky />}></Route>
-          <Route path="/create-vacancy" element={<CreateVacancy />}></Route>
+          <Route path="/" element={<Main user={user} />}></Route>
+          <Route
+            path="/vacancies"
+            element={<VacancyList user={user} />}
+          ></Route>
+          <Route
+            path="/vacancies/:id"
+            element={<Vacancy user={user} />}
+          ></Route>
+          <Route path="/vidguky" element={<Vidguky user={user} />}></Route>
+          <Route
+            path="/create-vacancy"
+            element={<CreateVacancy user={user} />}
+          ></Route>
         </Routes>
       </div>
     </Router>
