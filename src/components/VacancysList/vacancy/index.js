@@ -2,7 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./styles.scss";
 import Api, { baseURL } from "../../../api";
-const vacancy = ({ id, name, description, salary, user, status, update }) => {
+
+const Vacancy = ({ id, name, description, salary, user, status, update }) => {
   return (
     <NavLink className="each-vacancy__full" to={`/vacancies/${id}`}>
       <div className="each-vacancy">
@@ -47,4 +48,4 @@ const vacancy = ({ id, name, description, salary, user, status, update }) => {
   );
 };
 
-export default vacancy;
+export default Vacancy;
