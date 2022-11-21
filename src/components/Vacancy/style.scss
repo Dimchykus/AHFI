@@ -1,0 +1,16 @@
+.vacancy {
+  width: 87.5%;
+  margin: 0 auto;
+  font-family: Arial, Helvetica, sans-serif;
+  &__name {
+    font-size: 40px;
+  }
+
+  .description {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    line-height: 28px;
+    margin-bottom: 20px;
+  }
+}
