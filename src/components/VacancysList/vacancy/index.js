@@ -5,9 +5,11 @@ import Api, { baseURL } from "../../../api";
 
 const Vacancy = ({ id, name, description, salary, user, status, update }) => {
   return (
-    <NavLink className="each-vacancy__full" to={`/vacancies/${id}`}>
+    <div className="each-vacancy__full">
       <div className="each-vacancy">
-        <p className="each-vacancy__name">{name}</p>
+        <NavLink to={`/vacancies/${id}`}>
+          <p className="each-vacancy__name">{name}</p>
+        </NavLink>
         <div className="description-block">
           <p className="description-block__description">Опис: {description}</p>
           <p className="description-block__salary">Зарплата: {salary}</p>
@@ -18,10 +20,11 @@ const Vacancy = ({ id, name, description, salary, user, status, update }) => {
             {!status && (
               <button
                 className="each-vacancy__participate"
-                onClick={() => {
+                onClick={(e) => {
                   Api.put(`vacancy/approve/${id}`).then(() => {
                     update();
                   });
+                  e.stopPropagation();
                 }}
               >
                 Підвердити
@@ -30,10 +33,11 @@ const Vacancy = ({ id, name, description, salary, user, status, update }) => {
             {status && (
               <button
                 className="each-vacancy__participate"
-                onClick={() => {
+                onClick={(e) => {
                   Api.put(`vacancy/decline/${id}`).then(() => {
                     update();
                   });
+                  e.stopPropagation();
                 }}
               >
                 Сховати
@@ -41,10 +45,8 @@ const Vacancy = ({ id, name, description, salary, user, status, update }) => {
             )}
           </>
         )}
-
-        <button className="each-vacancy__participate">Відгукнутися</button>
       </div>
-    </NavLink>
+    </div>
   );
 };
 
