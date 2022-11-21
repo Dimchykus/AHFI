@@ -5,14 +5,16 @@
   display: flex;
   margin-bottom: 30px;
 
+  .info__link {
+    text-decoration: none;
+    color: black;
+    display: flex;
+  }
+
   &__name {
     padding-left: 10px;
 
     margin: auto 0;
-  }
-
-  &__full {
-    all: unset;
   }
 
   &__participate {
