@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Api from "../../api";
 
-const Sort = ({ setData }) => {
+const Sort = ({ setData, user }) => {
   const [title, setTitle] = useState("");
   const [experience, setExperience] = useState(null);
   const [city, setCity] = useState(null);
@@ -28,7 +28,7 @@ const Sort = ({ setData }) => {
     if (categoryID) searchParams.append("categoryID", parseInt(categoryID, 10));
     if (salary) searchParams.append("salary", parseInt(salary, 10));
     searchParams.append("sort", sort);
-    searchParams.append("type", "");
+    searchParams.append("type", user.isAdmin ? "" : "user");
 
     const url = `vacancy/filter?${searchParams.toString()}`;
 

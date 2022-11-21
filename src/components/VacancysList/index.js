@@ -45,6 +45,7 @@ const VacancyList = ({ user }) => {
       <Sort
         // setData={setVacancies}
         setData={() => {}}
+        user={user}
       />
       <div className="all-vacancies">
         {vacancies.map((obj, index) => (
