@@ -48,27 +48,30 @@ const Vacancy = ({ user }) => {
         <h2 className='description__header'>Опис вакансії</h2>
         <p className='description__info'>{vacancy.description}</p>
       </div>
-
-      <input
-        type='file'
-        onChange={(e) => {
-          setFile(e.target.files[0]);
-          console.log(e.target.files[0]);
-        }}
-      />
-      <button
-        onClick={() => {
-          Api.post('Responses', {
-            userID: user.id,
-            vacancyID: vacancy.id,
-            file,
-          }).then((res) => {
-            navigate('/');
-          });
-        }}
-      >
-        Відгукнутись
-      </button>
+      <div className='applying'>
+        <input
+          type='file'
+          className='applying__upload'
+          onChange={(e) => {
+            setFile(e.target.files[0]);
+            console.log(e.target.files[0]);
+          }}
+        />
+        <button
+          className='applying__finish'
+          onClick={() => {
+            Api.post('Responses', {
+              userID: user.id,
+              vacancyID: vacancy.id,
+              file,
+            }).then((res) => {
+              navigate('/');
+            });
+          }}
+        >
+          Відгукнутись
+        </button>
+      </div>
     </div>
   );
 };
