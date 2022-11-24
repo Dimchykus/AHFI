@@ -4,5 +4,5 @@ export const baseURL = "http://localhost:5000/";
 
 export default axios.create({
   baseURL,
-  withCredentials: false,
+  withCredentials: true,
 });

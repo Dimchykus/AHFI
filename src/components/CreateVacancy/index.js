@@ -25,22 +25,15 @@ const CreateVacancy = () => {
   }, []);
 
   const onSubmit = async (e) => {
-    fetch(`${baseURL}vacancies`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title,
-        city,
-        categoryID: `${baseURL}category/${category}`,
-        companyID: `${baseURL}companies/${company}`,
-        description,
-        experience,
-        salary,
-        createdAt: new Date(),
-      }),
+    Api.post("vacancies", {
+      title,
+      city,
+      categoryID: `${baseURL}category/${category}`,
+      companyID: `${baseURL}companies/${company}`,
+      description,
+      experience,
+      salary,
+      createdAt: new Date(),
     });
 
     e.preventDefault();
@@ -94,7 +87,7 @@ const CreateVacancy = () => {
             }}
           >
             {companies.map((item) => (
-              <option value={item.id}>{item.name}</option>
+              <option value={item._links.self.href}>{item.name}</option>
             ))}
           </select>
         </div>
