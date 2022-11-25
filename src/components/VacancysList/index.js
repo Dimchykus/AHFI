@@ -32,7 +32,7 @@ const VacancyList = ({ user }) => {
   const [vacancies, setVacancies] = useState([]);
 
   const getData = () => {
-    api.get("vacancies").then((res) => {
+    api.get('vacancies').then((res) => {
       const list = res.data._embedded.vacancies;
       if (user.isAdmin) {
         setVacancies(list);
@@ -47,12 +47,11 @@ const VacancyList = ({ user }) => {
   }, []);
 
   return (
-    <div className="container">
-      <Sort
-        setData={setVacancies}
-        user={user}
-      />
-      <div className="all-vacancies">
+    <div className='container'>
+      <div className='filters-container'>
+        <Sort setData={setVacancies} user={user} />
+      </div>
+      <div className='all-vacancies'>
         {vacancies.map((obj, index) => (
           <Vacancy {...obj} key={obj.name} user={user} update={getData} />
         ))}

@@ -1,49 +1,49 @@
-import { useState } from "react";
-import Api from "../../api";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import Api from '../../api';
+import { useNavigate } from 'react-router-dom';
 
 const Login = ({ setUser }) => {
   let navigate = useNavigate();
   const [state, setState] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPass] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPass] = useState('');
 
   const submit = () => {
     if (!state) {
       Api.get(`users/mail?email=${email}`).then((res) => {
         console.log(res);
         setUser(res.data);
-        navigate("/");
+        navigate('/');
       });
     } else {
-      Api.post("users", { email, password }).then((res) => {
+      Api.post('users', { email, password }).then((res) => {
         setUser(res.data._embedded);
-        navigate("/");
+        navigate('/');
       });
     }
   };
 
   return state ? (
     <div>
-      <div class="login_inputBlock">
-        <p class="login_inputTitle">Пошта</p>
+      <div class='login_inputBlock'>
+        <p class='login_inputTitle'>Пошта</p>
         <input
-          type="text"
+          type='text'
           value={email}
-          id="city"
-          class="login_input"
+          id='city'
+          class='login_input'
           onChange={(e) => {
             setEmail(e.target.value);
           }}
         />
       </div>
-      <div class="login_inputBlock">
-        <p class="login_inputTitle">Пароль</p>
+      <div class='login_inputBlock'>
+        <p class='login_inputTitle'>Пароль</p>
         <input
-          type="text"
+          type='text'
           value={password}
-          id="city"
-          class="login_input"
+          id='city'
+          class='login_input'
           onChange={(e) => {
             setPass(e.target.value);
           }}
@@ -66,25 +66,25 @@ const Login = ({ setUser }) => {
     </div>
   ) : (
     <div>
-      <div class="login_inputBlock">
-        <p class="login_inputTitle">Пошта</p>
+      <div class='login_inputBlock'>
+        <p class='login_inputTitle'>Пошта</p>
         <input
-          type="text"
+          type='text'
           value={email}
-          id="city"
-          class="login_input"
+          id='city'
+          class='login_input'
           onChange={(e) => {
             setEmail(e.target.value);
           }}
         />
       </div>
-      <div class="login_inputBlock">
-        <p class="login_inputTitle">Пароль</p>
+      <div class='login_inputBlock'>
+        <p class='login_inputTitle'>Пароль</p>
         <input
-          type="text"
+          type='text'
           value={password}
-          id="city"
-          class="login_input"
+          id='city'
+          class='login_input'
           onChange={(e) => {
             setPass(e.target.value);
           }}
