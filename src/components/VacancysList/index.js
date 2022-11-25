@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import Vacancy from "./vacancy";
-import Sort from "../Sort/index";
-import "./style.scss";
-import api from "../../api";
+import React, { useState, useEffect } from 'react';
+import Vacancy from './vacancy';
+import Sort from '../Sort/index';
+import './style.scss';
+import api from '../../api';
 
 // const vacancies = [
 //   {
@@ -32,7 +32,7 @@ const VacancyList = ({ user }) => {
   const [vacancies, setVacancies] = useState([]);
 
   const getData = () => {
-    api.get("vacancies").then((res) => {
+    api.get('vacancies').then((res) => {
       setVacancies(res.data._embedded.vacancies);
     });
   };
@@ -42,13 +42,15 @@ const VacancyList = ({ user }) => {
   }, []);
 
   return (
-    <div className="container">
-      <Sort
-        // setData={setVacancies}
-        setData={() => {}}
-        user={user}
-      />
-      <div className="all-vacancies">
+    <div className='container'>
+      <div className='filters-container'>
+        <Sort
+          // setData={setVacancies}
+          setData={() => {}}
+          user={user}
+        />
+      </div>
+      <div className='all-vacancies'>
         {vacancies.map((obj, index) => (
           <Vacancy
             {...obj}
