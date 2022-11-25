@@ -58,7 +58,7 @@ const CreateVacancy = () => {
             value={title}
             type='text'
             id='title'
-            class='create_v_input'
+            className='create_v_input'
           />
         </div>
 
@@ -66,7 +66,7 @@ const CreateVacancy = () => {
           <p class='create_v_inputTitle'>Категорія</p>
           <select
             id='category'
-            class='create_v_input'
+            className='create_v_input'
             onChange={(e) => {
               console.log(e);
               setCategory(e.target.value);
@@ -82,7 +82,7 @@ const CreateVacancy = () => {
           <p class='create_v_inputTitle'>Компанія</p>
           <select
             id='company'
-            class='create_v_input'
+            className='create_v_input'
             onChange={(e) => {
               setCompany(e.target.value);
             }}
@@ -99,7 +99,7 @@ const CreateVacancy = () => {
             type='text'
             value={city}
             id='city'
-            class='create_v_input'
+            className='create_v_input'
             onChange={(e) => {
               setCity(e.target.value);
             }}
@@ -112,7 +112,7 @@ const CreateVacancy = () => {
             type='text'
             value={description}
             id='description'
-            class='create_v_input'
+            className='create_v_input'
             onChange={(e) => {
               setDescription(e.target.value);
             }}
@@ -125,7 +125,7 @@ const CreateVacancy = () => {
             type='number'
             value={experience}
             id='experience'
-            class='create_v_input'
+            className='create_v_input'
             onChange={(e) => {
               setExperience(e.target.value);
             }}
@@ -138,14 +138,14 @@ const CreateVacancy = () => {
             type='number'
             id='salary'
             value={salary}
-            class='create_v_input'
+            className='create_v_input'
             onChange={(e) => {
               setSalary(e.target.value);
             }}
           />
         </div>
 
-        <input type='submit' value='Submit' />
+        <input className='add-vacancy' type='submit' value='Submit' />
       </form>
     </div>
   );

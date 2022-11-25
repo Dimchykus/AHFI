@@ -31,7 +31,7 @@ const Login = ({ setUser }) => {
           type='text'
           value={email}
           id='city'
-          class='login_input'
+          className='login_input'
           onChange={(e) => {
             setEmail(e.target.value);
           }}
@@ -43,7 +43,7 @@ const Login = ({ setUser }) => {
           type='text'
           value={password}
           id='city'
-          class='login_input'
+          classname='login_input'
           onChange={(e) => {
             setPass(e.target.value);
           }}
@@ -72,7 +72,7 @@ const Login = ({ setUser }) => {
           type='text'
           value={email}
           id='city'
-          class='login_input'
+          classname='login_input'
           onChange={(e) => {
             setEmail(e.target.value);
           }}
@@ -84,7 +84,7 @@ const Login = ({ setUser }) => {
           type='text'
           value={password}
           id='city'
-          class='login_input'
+          classname='login_input'
           onChange={(e) => {
             setPass(e.target.value);
           }}
