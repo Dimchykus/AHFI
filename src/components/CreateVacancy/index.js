@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import "./style.scss";
-import Api, { baseURL } from "../../api";
+import React, { useEffect, useState } from 'react';
+import './style.scss';
+import Api, { baseURL } from '../../api';
 
 const CreateVacancy = () => {
-  const [title, setTitle] = useState("");
-  const [city, setCity] = useState("");
+  const [title, setTitle] = useState('');
+  const [city, setCity] = useState('');
   const [category, setCategory] = useState(1);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState('');
   const [experience, setExperience] = useState(0);
   const [salary, setSalary] = useState(0);
   const [company, setCompany] = useState(1);
@@ -15,17 +15,17 @@ const CreateVacancy = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    Api.get("companies").then((res) => {
+    Api.get('companies').then((res) => {
       setCompanies(res.data._embedded.companies);
     });
-    Api.get("categories").then((res) => {
+    Api.get('categories').then((res) => {
       console.log(res);
       setCategories(res.data);
     });
   }, []);
 
   const onSubmit = async (e) => {
-    Api.post("vacancies", {
+    Api.post('vacancies', {
       title,
       city,
       categoryID: `${baseURL}category/${category}`,
@@ -40,32 +40,33 @@ const CreateVacancy = () => {
   };
 
   return (
-    <div class="create_v">
+    <div class='create_v'>
       <form
+        className='form-create'
         action={`${baseURL}vacancies`}
-        method="POST"
+        method='POST'
         onSubmit={(e) => {
           onSubmit(e);
         }}
       >
-        <div class="create_v_inputBlock">
-          <p class="create_v_inputTitle">Назва</p>
+        <div class='create_v_inputBlock'>
+          <p class='create_v_inputTitle'>Назва</p>
           <input
             onChange={(e) => {
               setTitle(e.target.value);
             }}
             value={title}
-            type="text"
-            id="title"
-            class="create_v_input"
+            type='text'
+            id='title'
+            class='create_v_input'
           />
         </div>
 
-        <div class="create_v_inputBlock">
-          <p class="create_v_inputTitle">Категорія</p>
+        <div class='create_v_inputBlock'>
+          <p class='create_v_inputTitle'>Категорія</p>
           <select
-            id="category"
-            class="create_v_input"
+            id='category'
+            class='create_v_input'
             onChange={(e) => {
               console.log(e);
               setCategory(e.target.value);
@@ -77,11 +78,11 @@ const CreateVacancy = () => {
           </select>
         </div>
 
-        <div class="create_v_inputBlock">
-          <p class="create_v_inputTitle">Компанія</p>
+        <div class='create_v_inputBlock'>
+          <p class='create_v_inputTitle'>Компанія</p>
           <select
-            id="company"
-            class="create_v_input"
+            id='company'
+            class='create_v_input'
             onChange={(e) => {
               setCompany(e.target.value);
             }}
@@ -92,59 +93,59 @@ const CreateVacancy = () => {
           </select>
         </div>
 
-        <div class="create_v_inputBlock">
-          <p class="create_v_inputTitle">Місто</p>
+        <div class='create_v_inputBlock'>
+          <p class='create_v_inputTitle'>Місто</p>
           <input
-            type="text"
+            type='text'
             value={city}
-            id="city"
-            class="create_v_input"
+            id='city'
+            class='create_v_input'
             onChange={(e) => {
               setCity(e.target.value);
             }}
           />
         </div>
 
-        <div class="create_v_inputBlock">
-          <p class="create_v_inputTitle">Опис</p>
+        <div class='create_v_inputBlock'>
+          <p class='create_v_inputTitle'>Опис</p>
           <input
-            type="text"
+            type='text'
             value={description}
-            id="description"
-            class="create_v_input"
+            id='description'
+            class='create_v_input'
             onChange={(e) => {
               setDescription(e.target.value);
             }}
           />
         </div>
 
-        <div class="create_v_inputBlock">
-          <p class="create_v_inputTitle">Досвід</p>
+        <div class='create_v_inputBlock'>
+          <p class='create_v_inputTitle'>Досвід</p>
           <input
-            type="number"
+            type='number'
             value={experience}
-            id="experience"
-            class="create_v_input"
+            id='experience'
+            class='create_v_input'
             onChange={(e) => {
               setExperience(e.target.value);
             }}
           />
         </div>
 
-        <div class="create_v_inputBlock">
-          <p class="create_v_inputTitle">Зарплата</p>
+        <div class='create_v_inputBlock'>
+          <p class='create_v_inputTitle'>Зарплата</p>
           <input
-            type="number"
-            id="salary"
+            type='number'
+            id='salary'
             value={salary}
-            class="create_v_input"
+            class='create_v_input'
             onChange={(e) => {
               setSalary(e.target.value);
             }}
           />
         </div>
 
-        <input type="submit" value="Submit" />
+        <input type='submit' value='Submit' />
       </form>
     </div>
   );
