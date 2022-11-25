@@ -1,8 +1,18 @@
 .container {
   width: 85%;
+  display: flex;
+  justify-content: space-between;
   margin: 0 auto;
 }
 
 .all-vacancies {
   margin-top: 40px;
+  width: 62%;
+}
+
+.filters-container {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border-radius: 10px;
+  margin-top: 40px;
+  width: 30%;
 }

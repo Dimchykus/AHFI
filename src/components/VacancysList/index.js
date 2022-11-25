@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import Vacancy from "./vacancy";
-import Sort from "../Sort/index";
-import "./style.scss";
-import api from "../../api";
+import React, { useState, useEffect } from 'react';
+import Vacancy from './vacancy';
+import Sort from '../Sort/index';
+import './style.scss';
+import api from '../../api';
 
 // const vacancies = [
 //   {

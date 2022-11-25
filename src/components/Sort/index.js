@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
-import Api from "../../api";
+import { useState, useEffect } from 'react';
+import Api from '../../api';
+import './style.scss';
 
 const Sort = ({ setData, user }) => {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
   const [experience, setExperience] = useState(null);
   const [city, setCity] = useState(null);
   const [categoryID, setCategoryID] = useState(null);
@@ -13,7 +14,7 @@ const Sort = ({ setData, user }) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    Api.get("categories").then((res) => {
+    Api.get('categories').then((res) => {
       console.log(res);
       setCategories(res.data);
     });
@@ -41,37 +42,37 @@ const Sort = ({ setData, user }) => {
   };
 
   return (
-    <div>
-      <div className="sort_inputBlock">
-        <p className="sort_inputTitle">Назва</p>
+    <div className='filters'>
+      <div className='sort_inputBlock'>
+        <p className='sort_inputTitle'>Назва</p>
         <input
           onChange={(e) => {
             setTitle(e.target.value);
           }}
           value={title}
-          type="text"
-          id="title"
-          className="sort_input"
+          type='text'
+          id='title'
+          className='sort_input'
         />
       </div>
 
-      <div className="sort_inputBlock">
-        <p className="sort_inputTitle">Досвід</p>
+      <div className='sort_inputBlock'>
+        <p className='sort_inputTitle'>Досвід</p>
         <input
           onChange={(e) => {
             setExperience(e.target.value);
           }}
           value={experience}
-          type="text"
-          id="title"
-          className="sort_input"
+          type='text'
+          id='title'
+          className='sort_input'
         />
       </div>
-      <div className="sort_inputBlock">
-        <p className="sort_inputTitle">Категорія</p>
+      <div className='sort_inputBlock'>
+        <p className='sort_inputTitle'>Категорія</p>
         <select
-          id="category"
-          class="create_v_input"
+          id='category'
+          class='create_v_input'
           onChange={(e) => {
             console.log(e);
             setCategoryID(e.target.value);
@@ -90,16 +91,16 @@ const Sort = ({ setData, user }) => {
             setSalary(e.target.value);
           }}
           value={salary}
-          type="text"
-          id="title"
-          className="sort_input"
+          type='text'
+          id='title'
+          className='sort_input'
         />
       </div>
-      <div className="sort_inputBlock">
-        <p className="sort_inputTitle">Сортувати</p>
+      <div className='sort_inputBlock'>
+        <p className='sort_inputTitle'>Сортувати</p>
         <select
-          id="category"
-          class="create_v_input"
+          id='category'
+          class='create_v_input'
           onChange={(e) => {
             console.log(e);
             setSort(e.target.value);
@@ -113,6 +114,7 @@ const Sort = ({ setData, user }) => {
       </div>
 
       <button
+        className='apply-filters'
         onClick={() => {
           handleSubmit();
         }}
