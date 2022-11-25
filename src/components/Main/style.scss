@@ -1,0 +1,17 @@
+.create-vac {
+  display: block;
+  padding: 15px 15px;
+  width: 600px;
+  height: 600px;
+  border-radius: 15px;
+  color: white;
+  background-color: #f8c5ba;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 50px;
+  cursor: pointer;
+  font-size: 40px;
+  &__link {
+    all: unset;
+  }
+}
