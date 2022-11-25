@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import Api from '../../api';
-import { useNavigate } from 'react-router-dom';
-import './style.scss';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import Api from "../../api";
+import { useNavigate } from "react-router-dom";
+import "./style.scss";
 
 // const vacancies = [
 //   {
@@ -40,31 +40,33 @@ const Vacancy = ({ user }) => {
   console.log(vacancy);
 
   return (
-    <div className='vacancy'>
-      <h2 className='vacancy__name'>{vacancy.title}</h2>
+    <div className="vacancy">
+      <h2 className="vacancy__name">{vacancy.title}</h2>
       <h3>Зарплата: {vacancy.salary}</h3>
-      <div className='description'>
-        <h2 className='description__header'>Опис вакансії</h2>
-        <p className='description__info'>{vacancy.description}</p>
+      <div className="description">
+        <h2 className="description__header">Опис вакансії</h2>
+        <p className="description__info">{vacancy.description}</p>
       </div>
-      <div className='applying'>
+      <div className="applying">
         <input
-          type='file'
-          className='applying__upload'
+          type="file"
+          className="applying__upload"
           onChange={(e) => {
             setFile(e.target.files[0]);
             console.log(e.target.files[0]);
           }}
         />
         <button
-          className='applying__finish'
+          className="applying__finish"
           onClick={() => {
-            Api.post('Responses', {
-              userID: user.id,
-              vacancyID: vacancy.id,
-              file,
-            }).then((res) => {
-              navigate('/');
+            let formData = new FormData();
+            formData.append("file", file);
+
+            Api.post(
+              `Responses?userId=${user.id}&VacancyId=${parseInt(id, 10)}`,
+              formData
+            ).then((res) => {
+              navigate("/");
             });
           }}
         >

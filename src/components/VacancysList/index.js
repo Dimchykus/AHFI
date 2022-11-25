@@ -33,7 +33,12 @@ const VacancyList = ({ user }) => {
 
   const getData = () => {
     api.get("vacancies").then((res) => {
-      setVacancies(res.data._embedded.vacancies);
+      const list = res.data._embedded.vacancies;
+      if (user.isAdmin) {
+        setVacancies(list);
+      } else {
+        setVacancies(list.filter((item) => item.status));
+      }
     });
   };
 
@@ -44,19 +49,12 @@ const VacancyList = ({ user }) => {
   return (
     <div className="container">
       <Sort
-        // setData={setVacancies}
-        setData={() => {}}
+        setData={setVacancies}
         user={user}
       />
       <div className="all-vacancies">
         {vacancies.map((obj, index) => (
-          <Vacancy
-            {...obj}
-            key={obj.name}
-            user={user}
-            // update={getData}
-            update={() => {}}
-          />
+          <Vacancy {...obj} key={obj.name} user={user} update={getData} />
         ))}
       </div>
     </div>

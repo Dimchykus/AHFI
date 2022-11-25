@@ -7,7 +7,7 @@ const Sort = ({ setData, user }) => {
   const [city, setCity] = useState(null);
   const [categoryID, setCategoryID] = useState(null);
   const [salary, setSalary] = useState(null);
-  const [sort, setSort] = useState(false);
+  const [sort, setSort] = useState(5);
   // const [type, setType] = useState("");
 
   const [categories, setCategories] = useState([]);
@@ -25,15 +25,18 @@ const Sort = ({ setData, user }) => {
     if (title) searchParams.append("title", title);
     if (experience) searchParams.append("experience", parseInt(experience, 10));
     if (city) searchParams.append("city", city);
-    if (categoryID) searchParams.append("categoryID", parseInt(categoryID, 10));
+    console.log(categoryID);
+    if (categoryID && categoryID >= 0)
+      searchParams.append("categoryID", parseInt(categoryID, 10));
     if (salary) searchParams.append("salary", parseInt(salary, 10));
     searchParams.append("sort", sort);
     searchParams.append("type", user.isAdmin ? "" : "user");
 
     const url = `vacancy/filter?${searchParams.toString()}`;
 
-    Api.get(url).then(() => {
-      setData();
+    Api.get(url).then((res) => {
+      console.log(res);
+      setData(res.data);
     });
   };
 
@@ -74,13 +77,14 @@ const Sort = ({ setData, user }) => {
             setCategoryID(e.target.value);
           }}
         >
+          <option value={-1}>Всі</option>
           {categories.map((item) => (
             <option value={item.id}>{item.name}</option>
           ))}
         </select>
       </div>
       <div className="sort_inputBlock">
-        <p className="sort_inputTitle">Зарплата</p>
+        <p className="sort_inputTitle">Мінімальна зарплата</p>
         <input
           onChange={(e) => {
             setSalary(e.target.value);
