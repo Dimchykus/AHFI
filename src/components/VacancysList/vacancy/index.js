@@ -85,6 +85,27 @@ const Vacancy = ({
                 Сховати
               </button>
             )}
+            <button
+              className="each-vacancy__participate"
+              onClick={(e) => {
+                Api.post(
+                  `vacancy/delete/${
+                    _links
+                      ? _links.self.href.split("/")[
+                          _links.self.href.split("/").length - 1
+                        ]
+                      : id
+                      ? id
+                      : 0
+                  }`
+                ).then(() => {
+                  update();
+                });
+                e.stopPropagation();
+              }}
+            >
+              Видалити
+            </button>
           </>
         )}
       </div>

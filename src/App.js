@@ -15,8 +15,10 @@ import CreateVacancy from "../src/components/CreateVacancy";
 import Header from "./components/Header";
 import Login from "./components/Login";
 import Api from "./api";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProtectedRoute = ({ user, children }) => {
   if (!user) {
@@ -48,6 +50,7 @@ function App() {
 
   return (
     <div>
+      <ToastContainer />
       <Header user={user} resetUser={() => setUser(null)} />
       <Routes>
         <Route

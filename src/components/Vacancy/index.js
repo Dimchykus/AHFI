@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Api from "../../api";
 import { useNavigate } from "react-router-dom";
 import "./style.scss";
-
+import { Response } from "../Vidguky";
 // const vacancies = [
 //   {
 //     id: 0,
@@ -24,16 +24,27 @@ const Vacancy = ({ user }) => {
   let navigate = useNavigate();
 
   const [vacancy, setVacancy] = useState(null);
+  const [responses, setResponses] = useState([]);
   const [file, setFile] = useState("");
 
   const { id } = useParams();
+
+  const getVidguks = () => {
+    Api.get(`Responses/vacancy/${id}`).then((res) => {
+      console.log(res);
+      setResponses(res.data);
+    });
+  };
 
   useEffect(() => {
     Api.get(`vacancies/${id}`).then((res) => {
       setVacancy(res.data);
       console.log(res);
     });
+    getVidguks();
   }, []);
+
+  if (!id) return null;
 
   if (!vacancy) return null;
 
@@ -47,41 +58,50 @@ const Vacancy = ({ user }) => {
         <h2 className="description__header">Опис вакансії</h2>
         <p className="description__info">{vacancy.description}</p>
       </div>
-      <div className="applying">
-        <input
-          type="file"
-          className="applying__upload"
-          accept="application/pdf"
-          onChange={(e) => {
-            const fileSize = e.target.files[0].size / 1024 / 1024; // in MiB
-            if (fileSize > 5) {
-              alert("Максимальний розмір 5мб.");
-              // $(file).val(''); //for clearing with Jquery
-              e.target.value = "";
-              return;
-            } else {
-              setFile(e.target.files[0]);
-              console.log(e.target.files[0]);
-            }
-          }}
-        />
-        <button
-          className="applying__finish"
-          onClick={() => {
-            let formData = new FormData();
-            formData.append("file", file);
+      {!user.isAdmin && (
+        <div className="applying">
+          <input
+            type="file"
+            className="applying__upload"
+            accept="application/pdf"
+            onChange={(e) => {
+              const fileSize = e.target.files[0].size / 1024 / 1024; // in MiB
+              if (fileSize > 5) {
+                alert("Максимальний розмір 5мб.");
+                // $(file).val(''); //for clearing with Jquery
+                e.target.value = "";
+                return;
+              } else {
+                setFile(e.target.files[0]);
+                console.log(e.target.files[0]);
+              }
+            }}
+          />
+          <button
+            className="applying__finish"
+            onClick={() => {
+              let formData = new FormData();
+              formData.append("file", file);
 
-            Api.post(
-              `Responses?userId=${user.id}&VacancyId=${parseInt(id, 10)}`,
-              formData
-            ).then((res) => {
-              navigate("/");
-            });
-          }}
-        >
-          Відгукнутись
-        </button>
-      </div>
+              Api.post(
+                `Responses?userId=${user.id}&VacancyId=${parseInt(id, 10)}`,
+                formData
+              ).then((res) => {
+                navigate("/");
+              });
+            }}
+          >
+            Відгукнутись
+          </button>
+        </div>
+      )}
+      {user.isAdmin && (
+        <div>
+          {responses.map((res) => (
+            <Response res={res} handle={() => getVidguks()} user={res.userID} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

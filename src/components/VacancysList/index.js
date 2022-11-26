@@ -32,8 +32,15 @@ const VacancyList = ({ user }) => {
   const [vacancies, setVacancies] = useState([]);
 
   const getData = () => {
-    api.get("vacancies").then((res) => {
-      const list = res.data._embedded.vacancies;
+    const searchParams = new URLSearchParams();
+
+    searchParams.append("sort", 5);
+    if (user && !user.isAdmin) searchParams.append("userId", user.id);
+
+    const url = `vacancy/filter?${searchParams.toString()}`;
+
+    api.get(url).then((res) => {
+      const list = res.data;
       if (user && user.isAdmin) {
         setVacancies(list);
       } else {

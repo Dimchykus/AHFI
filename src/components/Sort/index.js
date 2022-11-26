@@ -32,30 +32,37 @@ const Sort = ({ setData, user }) => {
       searchParams.append("categoryID", parseInt(categoryID, 10));
     if (salary) searchParams.append("salary", parseInt(salary, 10));
     searchParams.append("sort", sort);
-    searchParams.append("type", user.isAdmin ? "" : "user");
+    if (user && !user.isAdmin && personal)
+      searchParams.append("userId", user.id);
 
     const url = `vacancy/filter?${searchParams.toString()}`;
 
     Api.get(url).then((res) => {
-      console.log(res);
-      setData(res.data);
+      if (user && user.isAdmin) {
+        setData(res.data);
+      } else {
+        setData(res.data.filter((item) => item.status));
+      }
     });
   };
 
   return (
     <div className="filters">
-      <div className="sort_inputBlock">
-        <p className="sort_inputTitle">Назва</p>
-        <input
-          onChange={(e) => {
-            setPersonal(e.target.value);
-          }}
-          value={personal}
-          type="checkbox"
-          id="title"
-          className="sort_input"
-        />
-      </div>
+      {user && !user.isAdmin && (
+        <div className="sort_inputBlock">
+          <p className="sort_inputTitle">Персональні вакансії</p>
+          <input
+            onChange={(e) => {
+              setPersonal(e.target.checked);
+            }}
+            checked={personal}
+            type="checkbox"
+            id="title"
+            className="sort_input"
+          />
+        </div>
+      )}
+
       <div className="sort_inputBlock">
         <p className="sort_inputTitle">Назва</p>
         <input
