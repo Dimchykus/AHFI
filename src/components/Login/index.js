@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Api from '../../api';
 import { useNavigate } from 'react-router-dom';
+import './style.scss';
 
 const Login = ({ setUser }) => {
   let navigate = useNavigate();
@@ -43,7 +44,7 @@ const Login = ({ setUser }) => {
           type='text'
           value={password}
           id='city'
-          classname='login_input'
+          className='login_input'
           onChange={(e) => {
             setPass(e.target.value);
           }}
@@ -65,14 +66,14 @@ const Login = ({ setUser }) => {
       </button>
     </div>
   ) : (
-    <div>
+    <div className='login-form'>
       <div class='login_inputBlock'>
         <p class='login_inputTitle'>Пошта</p>
         <input
           type='text'
           value={email}
           id='city'
-          classname='login_input'
+          className='login_input'
           onChange={(e) => {
             setEmail(e.target.value);
           }}
@@ -84,26 +85,30 @@ const Login = ({ setUser }) => {
           type='text'
           value={password}
           id='city'
-          classname='login_input'
+          className='login_input'
           onChange={(e) => {
             setPass(e.target.value);
           }}
         />
       </div>
-      <button
-        onClick={() => {
-          submit();
-        }}
-      >
-        Увійти
-      </button>
-      <button
-        onClick={() => {
-          setState(true);
-        }}
-      >
-        Створити аккаунт
-      </button>
+      <div className='buttonscn'>
+        <button
+          className='login-button'
+          onClick={() => {
+            submit();
+          }}
+        >
+          Увійти
+        </button>
+        <button
+          className='signin-button'
+          onClick={() => {
+            setState(true);
+          }}
+        >
+          Створити аккаунт
+        </button>
+      </div>
     </div>
   );
 };
