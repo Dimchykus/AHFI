@@ -51,9 +51,18 @@ const Vacancy = ({ user }) => {
         <input
           type="file"
           className="applying__upload"
+          accept="application/pdf"
           onChange={(e) => {
-            setFile(e.target.files[0]);
-            console.log(e.target.files[0]);
+            const fileSize = e.target.files[0].size / 1024 / 1024; // in MiB
+            if (fileSize > 5) {
+              alert("Максимальний розмір 5мб.");
+              // $(file).val(''); //for clearing with Jquery
+              e.target.value = "";
+              return;
+            } else {
+              setFile(e.target.files[0]);
+              console.log(e.target.files[0]);
+            }
           }}
         />
         <button
