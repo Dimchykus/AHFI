@@ -1,11 +1,13 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import './style.scss';
 
 const Main = () => {
   return (
-    <div>
-      Main
-      <NavLink to="/create-vacancy">Створити вакансію</NavLink>
+    <div className='container'>
+      <NavLink className='create-vac' to='/create-vacancy'>
+        Створити вакансію
+      </NavLink>
     </div>
   );
 };

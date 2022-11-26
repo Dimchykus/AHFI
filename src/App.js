@@ -1,26 +1,26 @@
-import logo from "./logo.svg";
-import "./App.css";
+import logo from './logo.svg';
+import './App.css';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Link,
   Navigate,
-} from "react-router-dom";
-import VacancyList from "../src/components/VacancysList";
-import Vacancy from "../src/components/Vacancy";
-import Vidguky from "../src/components/Vidguky";
-import Main from "../src/components/Main";
-import CreateVacancy from "../src/components/CreateVacancy";
-import Header from "./components/Header";
-import Login from "./components/Login";
-import Api from "./api";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+} from 'react-router-dom';
+import VacancyList from '../src/components/VacancysList';
+import Vacancy from '../src/components/Vacancy';
+import Vidguky from '../src/components/Vidguky';
+import Main from '../src/components/Main';
+import CreateVacancy from '../src/components/CreateVacancy';
+import Header from './components/Header';
+import Login from './components/Login';
+import Api from './api';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ user, children }) => {
   if (!user) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to='/login' replace />;
   }
 
   return children;
@@ -28,7 +28,13 @@ const ProtectedRoute = ({ user, children }) => {
 
 function App() {
   let navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    id: 0,
+    name: 'Торас',
+    age: -1,
+    experience: 100500,
+    isAdmin: true,
+  });
 
   /*
  {
@@ -51,20 +57,20 @@ function App() {
       <Header user={user} />
       <Routes>
         <Route
-          path="/login"
+          path='/login'
           element={<Login setUser={setUser} />}
           user={user}
         ></Route>
         <Route
-          path="/"
+          path='/'
           element={
             <ProtectedRoute user={user}>
-              <Main user={user} />{" "}
+              <Main user={user} />{' '}
             </ProtectedRoute>
           }
         ></Route>
         <Route
-          path="/vacancies"
+          path='/vacancies'
           element={
             <ProtectedRoute user={user}>
               <VacancyList user={user} />
@@ -72,7 +78,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/vacancies/:id"
+          path='/vacancies/:id'
           element={
             <ProtectedRoute user={user}>
               <Vacancy user={user} />
@@ -80,7 +86,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/vidguky"
+          path='/vidguky'
           element={
             <ProtectedRoute user={user}>
               <Vidguky user={user} />
@@ -88,7 +94,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/create-vacancy"
+          path='/create-vacancy'
           element={
             <ProtectedRoute user={user}>
               <CreateVacancy user={user} />
