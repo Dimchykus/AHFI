@@ -5,12 +5,10 @@ const Vidgyku = ({ user }) => {
   const [responses, setResponses] = useState([]);
 
   const handle = () => {
-    Api.get(`Responses/user/${user.id}`).then(
-      (res) => {
-        console.log(res);
-        setResponses(res.data);
-      }
-    );
+    Api.get(`Responses/user/${user.id}`).then((res) => {
+      console.log(res);
+      setResponses(res.data);
+    });
   };
 
   useEffect(() => {
@@ -38,6 +36,15 @@ const Vidgyku = ({ user }) => {
             }}
           >
             Завантажити
+          </button>
+          <button
+            onClick={() => {
+              Api.get(`Responses/delete/${res.id}`).then((res) => {
+                handle();
+              });
+            }}
+          >
+            Відхилити
           </button>
         </>
       ))}

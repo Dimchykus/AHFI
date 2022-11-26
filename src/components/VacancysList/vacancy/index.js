@@ -37,7 +37,7 @@ const Vacancy = ({
           <p className="description-block__salary">Зарплата: {salary}</p>
         </div>
 
-        {user.isAdmin && (
+        {user && user.isAdmin && (
           <>
             {!status && (
               <button
