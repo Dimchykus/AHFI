@@ -28,7 +28,13 @@ const ProtectedRoute = ({ user, children }) => {
 
 function App() {
   let navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    id: 0,
+    name: 'Торас',
+    age: -1,
+    experience: 100500,
+    isAdmin: true,
+  });
 
   /*
  {

@@ -1,8 +1,9 @@
 .create-vac {
+  all: unset;
   display: block;
   padding: 15px 15px;
   width: 600px;
-  height: 600px;
+  height: 60px;
   border-radius: 15px;
   color: white;
   background-color: #f8c5ba;
@@ -11,7 +12,4 @@
   margin-top: 50px;
   cursor: pointer;
   font-size: 40px;
-  &__link {
-    all: unset;
-  }
 }

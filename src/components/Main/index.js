@@ -5,11 +5,9 @@ import './style.scss';
 const Main = () => {
   return (
     <div className='container'>
-      <button className='create-vac'>
-        <NavLink className='create-vac__link' to='/create-vacancy'>
-          Створити вакансію
-        </NavLink>
-      </button>
+      <NavLink className='create-vac' to='/create-vacancy'>
+        Створити вакансію
+      </NavLink>
     </div>
   );
 };
