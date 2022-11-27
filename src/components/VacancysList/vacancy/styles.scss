@@ -4,6 +4,7 @@
   height: 140px;
   display: flex;
   margin-bottom: 30px;
+  padding: 16px;
 
   .info__link {
     text-decoration: none;
@@ -12,17 +13,21 @@
   }
 
   &__name {
-    padding-left: 10px;
-
     margin: auto 0;
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  &__buttons {
+    margin-left: auto;
+    display: flex;
+    gap: 24px;
+    align-items: center;
   }
 
   &__participate {
     z-index: 5;
     height: 40px;
-    margin: auto 0;
-    margin-left: auto;
-    margin-right: 15px;
     align-items: center;
     background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
     border: 0;
@@ -35,6 +40,11 @@
     :active {
       outline: 0;
     }
+
+    &.delete {
+      background-image: linear-gradient(144deg, crimson, crimson 50%, #ffa5b6); 
+    }
+
     @media (min-width: 768px) {
       .button-63 {
         font-size: 24px;
@@ -47,7 +57,6 @@
 /* CSS */
 
 .description-block {
-  margin-left: 50px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

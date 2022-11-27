@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast as notify } from "react-toastify";
-export const baseURL = "https://35ec-195-137-226-123.eu.ngrok.io/";
+export const baseURL = "http://localhost:5000/";
 
 export const toast = (text, type) => {
   return notify(text ?? "Помилка!!!", {

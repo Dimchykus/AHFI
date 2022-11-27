@@ -1,0 +1,18 @@
+.vidhyk__List {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 40px;
+}
+
+.vidhyk__ {
+  width: 100%;
+  box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+  border-radius: 10px;
+  padding: 20px;
+
+  &title {
+    font-weight: 800;
+    font-size: 18px;
+  }
+}

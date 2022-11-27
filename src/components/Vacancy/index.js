@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Api from "../../api";
+import Api, { toast } from "../../api";
 import { useNavigate } from "react-router-dom";
 import "./style.scss";
 import { Response } from "../Vidguky";
@@ -63,6 +63,7 @@ const Vacancy = ({ user }) => {
           <input
             type="file"
             className="applying__upload"
+            title="Виберіть файл"
             accept="application/pdf"
             onChange={(e) => {
               const fileSize = e.target.files[0].size / 1024 / 1024; // in MiB
@@ -86,9 +87,14 @@ const Vacancy = ({ user }) => {
               Api.post(
                 `Responses?userId=${user.id}&VacancyId=${parseInt(id, 10)}`,
                 formData
-              ).then((res) => {
-                navigate("/");
-              });
+              )
+                .then((res) => {
+                  toast("Відгук успішно відправлений", "success");
+                  navigate("/");
+                })
+                .catch(() => {
+                  toast("Помилка відправлення");
+                });
             }}
           >
             Відгукнутись
@@ -96,7 +102,7 @@ const Vacancy = ({ user }) => {
         </div>
       )}
       {user.isAdmin && (
-        <div>
+        <div className="vidhyk__List padding0">
           {responses.map((res) => (
             <Response res={res} handle={() => getVidguks()} user={res.userID} />
           ))}

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Api from "../../api";
+import "./styles.scss";
 
 export const Response = ({ res, handle, user }) => {
+  const { vacancyID: vacancy } = res;
   function saveByteArray(reportName, byte) {
     var file = new Blob([byte], { type: "application/pdf" });
     var fileURL = URL.createObjectURL(file);
@@ -9,10 +11,12 @@ export const Response = ({ res, handle, user }) => {
   }
 
   return (
-    <div>
-      <h4>{user.name}</h4>
-      <h5>{user.email}</h5>
+    <div className="vidhyk__">
+      <h4 className="title">{vacancy.title}</h4>
+      <h5 className="city">{vacancy.city}</h5>
+      <h5 className="salary">{vacancy.salary}</h5>
       <button
+        className="load"
         onClick={() => {
           Api.get(`Responses/${res.id}`, {
             responseType: "arraybuffer",
@@ -24,6 +28,7 @@ export const Response = ({ res, handle, user }) => {
         Завантажити
       </button>
       <button
+        className="delete"
         onClick={() => {
           Api.get(`Responses/delete/${res.id}`).then((res) => {
             handle();
@@ -59,7 +64,7 @@ const Vidgyku = ({ user }) => {
   }, []);
 
   return (
-    <div>
+    <div className="vidhyk__List">
       {responses.map((res) => (
         <Response res={res} handle={() => handle()} user={res.userID} />
       ))}

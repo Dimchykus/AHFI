@@ -10,7 +10,9 @@ const Header = ({ user, resetUser }) => {
 
       <NavLink to="/vacancies">Вакансії</NavLink>
 
-      <NavLink to="/vidguky">Мої відгуки</NavLink>
+      <NavLink to="/vidguky">
+        {user && user.isAdmin ? "Всі відгуки" : "Мої відгуки"}
+      </NavLink>
 
       <div className="header-right">
         <div className="header-name">{user?.name ?? ""}</div>
