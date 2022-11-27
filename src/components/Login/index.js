@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Api, { sessionSet, toast } from "../../api";
 import { useNavigate } from "react-router-dom";
 import "./style.scss";
+import Multiselect from "multiselect-react-dropdown";
 
 const Login = ({ setUser, user }) => {
   let navigate = useNavigate();
@@ -11,6 +12,20 @@ const Login = ({ setUser, user }) => {
   const [name, setName] = useState("");
   const [vik, setVik] = useState("");
   const [dosvid, setDosvid] = useState("");
+  const [keys, setKeys] = useState([]);
+  const [keysSelected, setKeysSelected] = useState([]);
+
+  useEffect(() => {
+    Api.get(`keys`)
+      .then((res) => {
+        const arr = res.data._embedded.keys;
+        const list = arr.map((item, index) => ({ name: item.name, id: index }));
+        setKeys(list);
+      })
+      .catch(() => {
+        toast("Невдалось взяти ключі", "error");
+      });
+  }, []);
 
   const submit = () => {
     if (!state) {
@@ -46,7 +61,7 @@ const Login = ({ setUser, user }) => {
         age: vik,
         experience: dosvid,
         isAdmin: false,
-        userKeys: "java",
+        userKeys: keysSelected.map((item) => item.name).join(","),
       }).then((res) => {
         setUser(res.data._embedded);
         navigate("/");
@@ -112,6 +127,19 @@ const Login = ({ setUser, user }) => {
         <p class="login_inputTitle">Пароль</p>
         <input type="text" id="city" className="login_input" />
       </div>
+      <Multiselect
+        options={keys} // Options to display in the dropdown
+        selectedValues={keysSelected} // Preselected value to persist in dropdown
+        onSelect={(selectedList, selectedItem) => {
+          console.log(selectedList, selectedItem);
+          setKeysSelected(selectedList);
+        }} // Function will trigger on select event
+        onRemove={(selectedList, selectedItem) => {
+          console.log(selectedList, selectedItem);
+          setKeysSelected(selectedList);
+        }} // Function will trigger on remove event
+        displayValue="name" // Property name to display in the dropdown options
+      />
       <button
         onClick={() => {
           submit();
