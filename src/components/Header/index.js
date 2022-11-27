@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { sessionSet } from "../../api";
 import "./styles.scss";
 
 const Header = ({ user, resetUser }) => {
@@ -11,12 +12,21 @@ const Header = ({ user, resetUser }) => {
 
       <NavLink to="/vidguky">Мої відгуки</NavLink>
 
-      {user?.name ?? ""}
-      {user && (
-        <NavLink to="/login" onClick={() => resetUser()}>
-          Вийти
-        </NavLink>
-      )}
+      <div className="header-right">
+        <div className="header-name">{user?.name ?? ""}</div>
+        {user && (
+          <NavLink
+            to="/login"
+            onClick={() => {
+              resetUser();
+              sessionSet("user", null);
+            }}
+            className="header-exit"
+          >
+            Вийти
+          </NavLink>
+        )}
+      </div>
     </div>
   );
 };

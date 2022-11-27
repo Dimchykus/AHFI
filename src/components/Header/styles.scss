@@ -1,5 +1,5 @@
 .header {
-  height: 24px;
+  height: var(--header-height);
   width: 100%;
   border-bottom: 1px solid black;
   display: flex;
@@ -7,6 +7,12 @@
   justify-content: flex-start;
   gap: 18px;
   align-items: center;
+  display: flex;
+  gap: 26px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: white;
 
   a {
     color: black;
@@ -16,5 +22,21 @@
 
   .active {
     text-decoration: underline;
+  }
+
+  .header-right {
+    margin-left: auto;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  .header-name {
+    vertical-align: middle;
+  }
+  .header-exit {
+    padding: 5px;
+    background-color: crimson;
+    border-radius: 6px;
+    color: aliceblue;
   }
 }

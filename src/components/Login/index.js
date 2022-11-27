@@ -1,9 +1,9 @@
-import { useState } from "react";
-import Api, { toast } from "../../api";
+import { useEffect, useState } from "react";
+import Api, { sessionSet, toast } from "../../api";
 import { useNavigate } from "react-router-dom";
 import "./style.scss";
 
-const Login = ({ setUser }) => {
+const Login = ({ setUser, user }) => {
   let navigate = useNavigate();
   const [state, setState] = useState(false);
   const [email, setEmail] = useState("");
@@ -24,12 +24,13 @@ const Login = ({ setUser }) => {
           console.log(res);
           setUser(res.data);
           navigate("/");
+
+          sessionSet("user", res.data);
         })
         .catch(() => {
           toast("Неправильні дані, перевірте пароль та пошту!!!", "error");
         });
     } else {
-
       if (!email) toast("Введіть пошту");
       if (!name) toast("Введіть імя");
       if (!vik) toast("Введіть вік");
@@ -38,7 +39,6 @@ const Login = ({ setUser }) => {
       if (!email || !name || !vik || !dosvid) {
         return;
       }
-
 
       Api.post("users", {
         email,
@@ -53,6 +53,10 @@ const Login = ({ setUser }) => {
       });
     }
   };
+
+  useEffect(() => {
+    if (user) navigate("/");
+  }, [user]);
 
   return state ? (
     <div>

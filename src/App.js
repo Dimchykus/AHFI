@@ -14,8 +14,8 @@ import Main from "../src/components/Main";
 import CreateVacancy from "../src/components/CreateVacancy";
 import Header from "./components/Header";
 import Login from "./components/Login";
-import Api from "./api";
-import { useState } from "react";
+import Api, { sessionGet } from "./api";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -41,21 +41,20 @@ function App() {
     isAdmin: true,
   }
   */
-  // useEffect(() => {
-  //   const user = Api.get("users").then((res) => {
-  //     console.log(res.data._embedded);
-  //     return res;
-  //   });
-  // }, [])
+  useEffect(() => {
+    const data = sessionGet("user");
+
+    if (data) setUser(data);
+  }, []);
 
   return (
-    <div>
+    <div className="main">
       <ToastContainer />
       <Header user={user} resetUser={() => setUser(null)} />
       <Routes>
         <Route
           path="/login"
-          element={<Login setUser={setUser} />}
+          element={<Login setUser={setUser} user={user} />}
           user={user}
         ></Route>
         <Route

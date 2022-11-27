@@ -83,7 +83,7 @@ const Sort = ({ setData, user }) => {
             setExperience(e.target.value);
           }}
           value={experience}
-          type="text"
+          type="number"
           id="title"
           className="sort_input"
         />
@@ -92,7 +92,7 @@ const Sort = ({ setData, user }) => {
         <p className="sort_inputTitle">Категорія</p>
         <select
           id="category"
-          class="create_v_input"
+          className="sort_input"
           onChange={(e) => {
             console.log(e);
             setCategoryID(e.target.value);
@@ -111,7 +111,7 @@ const Sort = ({ setData, user }) => {
             setSalary(e.target.value);
           }}
           value={salary}
-          type="text"
+          type="number"
           id="title"
           className="sort_input"
         />
@@ -120,7 +120,7 @@ const Sort = ({ setData, user }) => {
         <p className="sort_inputTitle">Сортувати</p>
         <select
           id="category"
-          class="create_v_input"
+          className="sort_input"
           onChange={(e) => {
             console.log(e);
             setSort(e.target.value);

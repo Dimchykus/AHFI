@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Vacancy from "./vacancy";
 import Sort from "../Sort/index";
 import "./style.scss";
-import api from "../../api";
+import api, { toast } from "../../api";
 
 // const vacancies = [
 //   {
@@ -39,14 +39,19 @@ const VacancyList = ({ user }) => {
 
     const url = `vacancy/filter?${searchParams.toString()}`;
 
-    api.get(url).then((res) => {
-      const list = res.data;
-      if (user && user.isAdmin) {
-        setVacancies(list);
-      } else {
-        setVacancies(list.filter((item) => item.status));
-      }
-    });
+    api
+      .get(url)
+      .then((res) => {
+        const list = res.data;
+        if (user && user.isAdmin) {
+          setVacancies(list);
+        } else {
+          setVacancies(list.filter((item) => item.status));
+        }
+      })
+      .catch(() => {
+        toast("Невдалось завантажити вакансії");
+      });
   };
 
   useEffect(() => {
