@@ -74,7 +74,7 @@ const Login = ({ setUser, user }) => {
   }, [user]);
 
   return state ? (
-    <div>
+    <div className="registration-cont">
       <div class="login_inputBlock">
         <p class="login_inputTitle">Пошта</p>
         <input
@@ -126,6 +126,24 @@ const Login = ({ setUser, user }) => {
       <div class="login_inputBlock">
         <p class="login_inputTitle">Пароль</p>
         <input type="text" id="city" className="login_input" />
+      </div>
+      <div className="buttons-content">
+        <button
+          className="register"
+          onClick={() => {
+            submit();
+          }}
+        >
+          Реєструватись
+        </button>
+        <button
+          className="signin-button"
+          onClick={() => {
+            setState(false);
+          }}
+        >
+          Уже існує аккаунт
+        </button>
       </div>
       <Multiselect
         options={keys} // Options to display in the dropdown

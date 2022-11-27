@@ -39,5 +39,12 @@
     background-color: crimson;
     border-radius: 6px;
     color: aliceblue;
+
+    &:hover {
+      background-color: #a62930;
+      opacity: 1;
+      transform: translateY(0);
+      transition-duration: 0.35s;
+    }
   }
 }
