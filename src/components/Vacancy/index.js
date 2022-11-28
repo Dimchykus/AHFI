@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import Api, { toast } from "../../api";
-import { useNavigate } from "react-router-dom";
-import "./style.scss";
-import { Response } from "../Vidguky";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import Api, { toast } from '../../api';
+import { useNavigate } from 'react-router-dom';
+import './style.scss';
+import { Response } from '../Vidguky';
 // const vacancies = [
 //   {
 //     id: 0,
@@ -25,7 +25,7 @@ const Vacancy = ({ user }) => {
 
   const [vacancy, setVacancy] = useState(null);
   const [responses, setResponses] = useState([]);
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState('');
 
   const { id } = useParams();
 
@@ -48,29 +48,29 @@ const Vacancy = ({ user }) => {
 
   if (!vacancy) return null;
 
-  console.log(vacancy);
-
   return (
-    <div className="vacancy">
-      <h2 className="vacancy__name">{vacancy.title}</h2>
+    <div className='vacancy'>
+      <h2 className='vacancy__name'>{vacancy.title}</h2>
       <h3>Зарплата: {vacancy.salary}</h3>
-      <div className="description">
-        <h2 className="description__header">Опис вакансії</h2>
-        <p className="description__info">{vacancy.description}</p>
+      <h3>Місто: {vacancy.city}</h3>
+      <h3>Дата створення: {vacancy.createdAt}</h3>
+      <div className='description'>
+        <h2 className='description__header'>Опис вакансії</h2>
+        <p className='description__info'>{vacancy.description}</p>
       </div>
       {!user.isAdmin && (
-        <div className="applying">
+        <div className='applying'>
           <input
-            type="file"
-            className="applying__upload"
-            title="Виберіть файл"
-            accept="application/pdf"
+            type='file'
+            className='applying__upload'
+            title='Виберіть файл'
+            accept='application/pdf'
             onChange={(e) => {
               const fileSize = e.target.files[0].size / 1024 / 1024; // in MiB
               if (fileSize > 5) {
-                alert("Максимальний розмір 5мб.");
+                alert('Максимальний розмір 5мб.');
                 // $(file).val(''); //for clearing with Jquery
-                e.target.value = "";
+                e.target.value = '';
                 return;
               } else {
                 setFile(e.target.files[0]);
@@ -79,21 +79,21 @@ const Vacancy = ({ user }) => {
             }}
           />
           <button
-            className="applying__finish"
+            className='applying__finish'
             onClick={() => {
               let formData = new FormData();
-              formData.append("file", file);
+              formData.append('file', file);
 
               Api.post(
                 `Responses?userId=${user.id}&VacancyId=${parseInt(id, 10)}`,
                 formData
               )
                 .then((res) => {
-                  toast("Відгук успішно відправлений", "success");
-                  navigate("/");
+                  toast('Відгук успішно відправлений', 'success');
+                  navigate('/');
                 })
                 .catch(() => {
-                  toast("Помилка відправлення");
+                  toast('Помилка відправлення');
                 });
             }}
           >
@@ -102,7 +102,7 @@ const Vacancy = ({ user }) => {
         </div>
       )}
       {user.isAdmin && (
-        <div className="vidhyk__List padding0">
+        <div className='vidhyk__List padding0'>
           {responses.map((res) => (
             <Response res={res} handle={() => getVidguks()} user={res.userID} />
           ))}
