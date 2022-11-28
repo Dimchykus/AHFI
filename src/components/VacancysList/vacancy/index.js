@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./styles.scss";
-import Api, { baseURL } from "../../../api";
+import Api, { baseURL, sessionSet } from "../../../api";
 
 const Vacancy = ({
   id,
@@ -11,6 +11,10 @@ const Vacancy = ({
   user,
   status,
   update,
+  experience,
+  city,
+  companyID,
+  categoryID,
   _links,
 }) => {
   return (
@@ -32,7 +36,7 @@ const Vacancy = ({
             <p className="each-vacancy__name">{title}</p>
           </NavLink>
           <p className="description-block__description">
-            Опис: {description.split(" ").slice(0, 10).join(" ")}...
+            {description.split(" ").slice(0, 10).join(" ")}...
           </p>
           <p className="description-block__salary">Зарплата: {salary}</p>
         </div>
@@ -86,6 +90,27 @@ const Vacancy = ({
                   Сховати
                 </button>
               )}
+              <NavLink
+                className="each-vacancy__participate"
+                to="/create-vacancy"
+                onClick={() => {
+                  sessionSet("vacancy", {
+                    id,
+                    title,
+                    description,
+                    salary,
+                    user,
+                    status,
+                    update,
+                    experience,
+                    city,
+                    companyID,
+                    categoryID,
+                  });
+                }}
+              >
+                Редагувати
+              </NavLink>
               <button
                 className="each-vacancy__participate delete"
                 onClick={(e) => {

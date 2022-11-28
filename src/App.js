@@ -19,6 +19,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Module from "./components/Module";
 
 const ProtectedRoute = ({ user, children }) => {
   if (!user) {
@@ -90,6 +91,7 @@ function App() {
             </ProtectedRoute>
           }
         ></Route>
+        <Route path="/in-progress" element={<Module user={user} />}></Route>
       </Routes>
     </div>
   );

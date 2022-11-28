@@ -64,6 +64,7 @@ const VacancyList = ({ user }) => {
         <Sort setData={setVacancies} user={user} />
       </div>
       <div className="all-vacancies">
+        {vacancies.length === 0 && <img src="empty.png" alt="собачка втікла" />}
         {vacancies.map((obj, index) => (
           <Vacancy {...obj} key={obj.name} user={user} update={getData} />
         ))}

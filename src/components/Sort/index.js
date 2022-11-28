@@ -84,6 +84,7 @@ const Sort = ({ setData, user }) => {
           }}
           value={experience}
           type="number"
+          min={0}
           id="title"
           className="sort_input"
         />
@@ -112,6 +113,7 @@ const Sort = ({ setData, user }) => {
           }}
           value={salary}
           type="number"
+          min={0}
           id="title"
           className="sort_input"
         />

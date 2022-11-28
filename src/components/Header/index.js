@@ -6,7 +6,9 @@ import "./styles.scss";
 const Header = ({ user, resetUser }) => {
   return (
     <div className="header">
-      <NavLink to="/">Головна</NavLink>
+      <NavLink to="/">
+        <img src="/logo.png" alt="ahfi" />
+      </NavLink>
 
       <NavLink to="/vacancies">Вакансії</NavLink>
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./style.scss";
-import Api, { baseURL, toast } from "../../api";
+import Api, { baseURL, toast, sessionGet, sessionSet } from "../../api";
 import { useNavigate } from "react-router-dom";
 
 const CreateVacancy = () => {
@@ -15,6 +15,8 @@ const CreateVacancy = () => {
   const [companies, setCompanies] = useState([]);
   const [categories, setCategories] = useState([]);
 
+  const [editObj, setObj] = useState(null);
+
   useEffect(() => {
     Api.get("companies").then((res) => {
       setCompanies(res.data._embedded.companies);
@@ -23,10 +25,28 @@ const CreateVacancy = () => {
       console.log(res);
       setCategories(res.data);
     });
+
+    const obj = sessionGet("vacancy");
+    if (obj) {
+      console.log(obj);
+      setObj(obj);
+
+      setTitle(obj.title);
+      setDescription(obj.description);
+      setCity(obj.city);
+      setCategory(obj.categoryID.id);
+      setExperience(obj.experience);
+      setSalary(obj.salary);
+      setCompany(`${baseURL}companies/${obj.companyID.id}`);
+    }
+
+    return () => {
+      sessionSet("vacancy", null);
+    };
   }, []);
 
   let navigate = useNavigate();
-  
+
   const onSubmit = async (e) => {
     if (!title) toast("Введіть назву");
     if (!city) toast("Введіть місто");
@@ -37,24 +57,60 @@ const CreateVacancy = () => {
     if (!title || !city || !description || !experience || !salary) {
       return;
     }
-
-    Api.post("vacancies", {
-      title,
-      city,
-      categoryID: `${baseURL}category/${category}`,
-      companyID: `${baseURL}companies/${company}`,
-      description,
-      experience,
-      salary,
-      createdAt: new Date(),
-    })
-      .then(() => {
-        navigate("/vacancies");
-        toast("Створено", "success");
+    if (!editObj) {
+      Api.post("vacancies", {
+        title,
+        city,
+        categoryID: `${baseURL}category/${category}`,
+        companyID: `${baseURL}companies/${company}`,
+        description,
+        experience,
+        salary,
+        createdAt: new Date(),
       })
-      .catch(() => {
-        toast("Помилка Створення");
+        .then(() => {
+          navigate("/vacancies");
+          toast("Створено", "success");
+        })
+        .catch(() => {
+          toast("Помилка Створення");
+        });
+    } else {
+      const _company = companies.find((item) => {
+        console.log(item._links.self.href, company);
+        return item._links.self.href === company;
       });
+
+      const _category = categories.find((item) => {
+        console.log(item.id, category);
+        return item.id == category;
+      });
+
+      Api.post(`vacancy/update/${editObj.id}`, {
+        title,
+        city,
+        categoryID: _category,
+        companyID: {
+          name: _company.name,
+          id: _company._links
+            ? _company._links.self.href.split("/")[
+                _company._links.self.href.split("/").length - 1
+              ]
+            : 0,
+        },
+        description,
+        experience,
+        salary,
+        createdAt: new Date(),
+      })
+        .then(() => {
+          navigate("/vacancies");
+          toast("Оновлено", "success");
+        })
+        .catch(() => {
+          toast("Помилка оновлення");
+        });
+    }
 
     e.preventDefault();
   };
@@ -63,8 +119,6 @@ const CreateVacancy = () => {
     <div class="create_v">
       <form
         className="form-create"
-        action={`${baseURL}vacancies`}
-        method="POST"
         onSubmit={(e) => {
           onSubmit(e);
         }}
@@ -87,6 +141,7 @@ const CreateVacancy = () => {
           <select
             id="category"
             className="create_v_input"
+            value={editObj ? category : undefined}
             onChange={(e) => {
               console.log(e);
               setCategory(e.target.value);
@@ -102,6 +157,7 @@ const CreateVacancy = () => {
           <p class="create_v_inputTitle">Компанія</p>
           <select
             id="company"
+            value={editObj ? company : undefined}
             className="create_v_input"
             onChange={(e) => {
               setCompany(e.target.value);
@@ -165,7 +221,11 @@ const CreateVacancy = () => {
           />
         </div>
 
-        <input className="add-vacancy" type="submit" value="Submit" />
+        <input
+          className="add-vacancy"
+          type="submit"
+          value={editObj ? "Оновити" : "Створити"}
+        />
       </form>
     </div>
   );
