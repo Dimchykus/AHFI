@@ -18,8 +18,8 @@ const CreateVacancy = () => {
   const [editObj, setObj] = useState(null);
 
   useEffect(() => {
-    Api.get("companies").then((res) => {
-      setCompanies(res.data._embedded.companies);
+    Api.get("company").then((res) => {
+      setCompanies(res.data);
     });
     Api.get("categories").then((res) => {
       console.log(res);
@@ -37,7 +37,7 @@ const CreateVacancy = () => {
       setCategory(obj.categoryID.id);
       setExperience(obj.experience);
       setSalary(obj.salary);
-      setCompany(`${baseURL}companies/${obj.companyID.id}`);
+      setCompany(obj.companyID.id);
     }
 
     return () => {
@@ -77,8 +77,8 @@ const CreateVacancy = () => {
         });
     } else {
       const _company = companies.find((item) => {
-        console.log(item._links.self.href, company);
-        return item._links.self.href === company;
+        console.log(item.id, company);
+        return item.id == company;
       });
 
       const _category = categories.find((item) => {
@@ -90,14 +90,7 @@ const CreateVacancy = () => {
         title,
         city,
         categoryID: _category,
-        companyID: {
-          name: _company.name,
-          id: _company._links
-            ? _company._links.self.href.split("/")[
-                _company._links.self.href.split("/").length - 1
-              ]
-            : 0,
-        },
+        companyID: _company,
         description,
         experience,
         salary,
@@ -164,7 +157,7 @@ const CreateVacancy = () => {
             }}
           >
             {companies.map((item) => (
-              <option value={item._links.self.href}>{item.name}</option>
+              <option value={item.id}>{item.name}</option>
             ))}
           </select>
         </div>

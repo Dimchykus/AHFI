@@ -114,7 +114,7 @@ const Vacancy = ({
               <button
                 className="each-vacancy__participate delete"
                 onClick={(e) => {
-                  Api.post(
+                  Api.get(
                     `vacancy/delete/${
                       _links
                         ? _links.self.href.split("/")[
