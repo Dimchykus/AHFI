@@ -67,14 +67,7 @@ function App() {
           }
         ></Route>
         <Route path="/vacancies" element={<VacancyList user={user} />}></Route>
-        <Route
-          path="/vacancies/:id"
-          element={
-            <ProtectedRoute user={user}>
-              <Vacancy user={user} />
-            </ProtectedRoute>
-          }
-        ></Route>
+        <Route path="/vacancies/:id" element={<Vacancy user={user} />}></Route>
         <Route
           path="/vidguky"
           element={

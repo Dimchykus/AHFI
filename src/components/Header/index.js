@@ -30,6 +30,14 @@ const Header = ({ user, resetUser }) => {
             Вийти
           </NavLink>
         )}
+        {!user && (
+          <div>
+            {" "}
+            <NavLink to="/login" className="header-exit">
+              Увійти
+            </NavLink>
+          </div>
+        )}
       </div>
     </div>
   );
