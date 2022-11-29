@@ -125,7 +125,7 @@ const Login = ({ setUser, user }) => {
       </div>
       <div class="login_inputBlock margin-bottom">
         <p class="login_inputTitle">Пароль</p>
-        <input type="text" id="city" className="login_input" />
+        <input type="password" id="city" className="login_input" />
       </div>
       <p class="login_inputTitle">Ключі</p>
       <Multiselect
@@ -177,7 +177,7 @@ const Login = ({ setUser, user }) => {
       <div class="login_inputBlock">
         <p class="login_inputTitle">Пароль</p>
         <input
-          type="text"
+          type="password"
           value={password}
           id="city"
           className="login_input"
