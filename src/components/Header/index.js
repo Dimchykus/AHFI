@@ -1,31 +1,31 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { sessionSet } from "../../api";
-import "./styles.scss";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { sessionSet } from '../../api';
+import './styles.scss';
 
 const Header = ({ user, resetUser }) => {
   return (
-    <div className="header">
-      <NavLink to="/">
-        <img src="/logo.png" alt="ahfi" />
+    <div className='header'>
+      <NavLink to='/'>
+        <img className='logo-ahfi' src='/logo.png' alt='ahfi' />
       </NavLink>
 
-      <NavLink to="/vacancies">Вакансії</NavLink>
+      <NavLink to='/vacancies'>Вакансії</NavLink>
 
-      <NavLink to="/vidguky">
-        {user && user.isAdmin ? "Всі відгуки" : "Мої відгуки"}
+      <NavLink to='/vidguky'>
+        {user && user.isAdmin ? 'Всі відгуки' : 'Мої відгуки'}
       </NavLink>
 
-      <div className="header-right">
-        <div className="header-name">{user?.name ?? ""}</div>
+      <div className='header-right'>
+        <div className='header-name'>{user?.name ?? ''}</div>
         {user && (
           <NavLink
-            to="/login"
+            to='/login'
             onClick={() => {
               resetUser();
-              sessionSet("user", null);
+              sessionSet('user', null);
             }}
-            className="header-exit"
+            className='header-exit'
           >
             Вийти
           </NavLink>

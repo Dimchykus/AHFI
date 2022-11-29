@@ -31,7 +31,6 @@ const Vacancy = ({ user }) => {
 
   const getVidguks = () => {
     Api.get(`Responses/vacancy/${id}`).then((res) => {
-      console.log(res);
       setResponses(res.data);
     });
   };
@@ -39,7 +38,8 @@ const Vacancy = ({ user }) => {
   useEffect(() => {
     Api.get(`vacancies/${id}`).then((res) => {
       setVacancy(res.data);
-      console.log(res);
+
+      console.log(res.data);
     });
     getVidguks();
   }, []);
