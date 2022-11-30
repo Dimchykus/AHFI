@@ -69,7 +69,7 @@ const Vacancy = ({ user }) => {
                 accept="application/pdf"
                 onChange={(e) => {
                   const fileSize = e.target.files[0].size / 1024 / 1024; // in MiB
-                  if (fileSize > 5) {
+                  if (fileSize > 1) {
                     alert("Максимальний розмір 5мб.");
                     // $(file).val(''); //for clearing with Jquery
                     e.target.value = "";

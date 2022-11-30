@@ -90,27 +90,29 @@ const Vacancy = ({
                   Сховати
                 </button>
               )}
-              <NavLink
-                className="each-vacancy__participate"
-                to="/create-vacancy"
-                onClick={() => {
-                  sessionSet("vacancy", {
-                    id,
-                    title,
-                    description,
-                    salary,
-                    user,
-                    status,
-                    update,
-                    experience,
-                    city,
-                    companyID,
-                    categoryID,
-                  });
-                }}
-              >
-                Редагувати
-              </NavLink>
+              <button className="each-vacancy__participate">
+                <NavLink
+                  to="/create-vacancy"
+                  onClick={() => {
+                    sessionSet("vacancy", {
+                      id,
+                      title,
+                      description,
+                      salary,
+                      user,
+                      status,
+                      update,
+                      experience,
+                      city,
+                      companyID,
+                      categoryID,
+                    });
+                  }}
+                >
+                  Редагувати
+                </NavLink>
+              </button>
+
               <button
                 className="each-vacancy__participate delete"
                 onClick={(e) => {
