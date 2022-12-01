@@ -29,3 +29,13 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+@media (max-width: 768px) {
+  .create-vac {
+    width: 100%;
+  }
+  .all-modules {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+}

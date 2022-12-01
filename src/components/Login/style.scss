@@ -123,3 +123,12 @@
 .margin-bottom {
   margin-bottom: 20px;
 }
+
+@media (max-width: 768px) {
+  .login-form {
+    width: 80%;
+  }
+  .registration-cont {
+    width: 80%;
+  }
+}

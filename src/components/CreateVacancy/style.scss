@@ -29,7 +29,7 @@
   color: #fff;
   cursor: pointer;
   display: block;
-  font-family: Inter, -apple-system, system-ui, 'Segoe UI', Helvetica, Arial,
+  font-family: Inter, -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
     sans-serif;
   padding: 13px 20px;
   text-align: center;
@@ -45,5 +45,11 @@
   &:active {
     transform: translateY(2px);
     transition-duration: 0.35s;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-create {
+    width: 100%;
   }
 }

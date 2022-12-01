@@ -27,3 +27,13 @@
   position: sticky;
   top: 0;
 }
+
+@media (max-width: 768px) {
+  .filters-container {
+    position: static;
+    width: 100%;
+  }
+  .container {
+    flex-direction: column;
+  }
+}

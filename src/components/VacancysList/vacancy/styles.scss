@@ -1,7 +1,7 @@
 .each-vacancy {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 10px;
-  height: 140px;
+  height: 180px;
   display: flex;
   margin-bottom: 30px;
   padding: 16px;
@@ -75,5 +75,12 @@
 
   &__description {
     height: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .each-vacancy {
+    flex-direction: column;
+    height: auto;
   }
 }
