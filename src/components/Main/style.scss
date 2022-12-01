@@ -1,7 +1,7 @@
 .create-vac {
   all: unset;
-  display: block;
-  padding-top: 45px;
+  display: inline-block;
+  padding: 20px 0;
   width: 45%;
   height: 100px;
   border-radius: 15px;
@@ -10,9 +10,11 @@
   text-align: center;
   margin: 0 auto;
   margin-top: 35px;
-
+  vertical-align: middle;
   cursor: pointer;
-  font-size: 40px;
+  font-size: 30px;
+  line-height: 28px;
+  height: 20%;
   &:last-child {
     margin-bottom: 35px;
   }

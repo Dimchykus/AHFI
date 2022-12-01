@@ -4,6 +4,7 @@ import Api, { toast } from "../../api";
 import { useNavigate } from "react-router-dom";
 import "./style.scss";
 import { Response } from "../Vidguky";
+import axios from "axios";
 // const vacancies = [
 //   {
 //     id: 0,
@@ -26,6 +27,7 @@ const Vacancy = ({ user }) => {
   const [vacancy, setVacancy] = useState(null);
   const [responses, setResponses] = useState([]);
   const [file, setFile] = useState("");
+  const [company, setCompany] = useState(null);
 
   const { id } = useParams();
 
@@ -41,6 +43,13 @@ const Vacancy = ({ user }) => {
 
       console.log(res.data);
     });
+
+    Api.get(`vacancy/byVacancy/${id}`).then((res) => {
+      setCompany(res.data);
+
+      console.log(res.data);
+    });
+
     getVidguks();
   }, []);
 
@@ -53,7 +62,8 @@ const Vacancy = ({ user }) => {
       <h2 className="vacancy__name">{vacancy.title}</h2>
       <h3>Зарплата: {vacancy.salary}</h3>
       <h3>Місто: {vacancy.city}</h3>
-      <h3>Дата створення: {vacancy.createdAt}</h3>
+
+      {company && <h3>Компанія: {company.name}</h3>}
       <div className="description">
         <h2 className="description__header">Опис вакансії</h2>
         <p className="description__info">{vacancy.description}</p>
